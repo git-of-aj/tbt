@@ -1,8 +1,7 @@
 name: PostgreSQL for GitHub Actions
 
-on:
-  push:
-    branches: []
+on: 
+  workflow_dispatch
 
 jobs:
   build:
