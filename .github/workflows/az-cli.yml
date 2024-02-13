@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@master
             
    # Authentication
-    - uses: azure/login@v1
+    - uses: azure/login@v1.6.0
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS  }}
         
