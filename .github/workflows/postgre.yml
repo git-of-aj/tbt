@@ -1,0 +1,29 @@
+name: PostgreSQL for GitHub Actions
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Downloads code to the runner
+      - uses: actions/checkout@v2
+
+      # Step 2: Login to Azure 
+      - uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # Step 3: Run PostgreSQL script
+      - uses: azure/postgresql@v1
+        with:
+          server-name: ${{ secrets.POSTGRESQL_SERVER_NAME }}
+          connection-string: ${{ secrets.AZURE_POSTGRESQL_CONNECTION_STRING }}
+          plsql-file: './data.sql'
+
+      # Step 4: Azure logout
+      - name: logout
+        run: |
+          az logout
