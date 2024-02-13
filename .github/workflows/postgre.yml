@@ -18,7 +18,7 @@ jobs:
       # Step 3: Run PostgreSQL script
     - uses: azure/postgresql@v1
       with:
-          server-name: ${{ secrets.POSTGRESQL_SERVER_NAME }}
+          server-name: test897
           connection-string: ${{ secrets.AZURE_POSTGRESQL_CONNECTION_STRING }}
           plsql-file: './data.sql'
 
