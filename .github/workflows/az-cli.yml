@@ -1,6 +1,7 @@
 name: workflow to Create an Azure Web app, build and deploy Docker app to the Azure app
 
-on: push
+on: 
+  workflow_dispatch
 
 env:
   AZURE_RESOURCE_GROUP: ActionsDemo   # set this to your Azure Resource group's name  
