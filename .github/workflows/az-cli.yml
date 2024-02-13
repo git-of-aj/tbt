@@ -1,0 +1,37 @@
+name: workflow to Create an Azure Web app, build and deploy Docker app to the Azure app
+
+on: push
+
+env:
+  AZURE_RESOURCE_GROUP: ActionsDemo   # set this to your Azure Resource group's name  
+  AZURE_WEBAPP_NAME: AppWithContainer1   # set this to your application's name
+  AZURE_APP_PLAN: ActionPlan  # set this to your App service plan's name
+  CONTAINER_REGISTRY: actionregistry.azurecr.io   # set this to Container Registry name
+
+jobs:
+  build-and-deploy-to-dev:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+    - uses: actions/checkout@master
+            
+   # Authentication
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS  }}
+    
+    # Authentication
+    - run: |
+        docker build . -t ${{ env.CONTAINER_REGISTRY }}/app:latest
+        docker push ${{ env.CONTAINER_REGISTRY }}/app:latest
+        
+    # Provision a new Web App
+    - name: Azure CLI script to create a new Web App for Container
+      uses: azure/CLI@v1
+      with:
+        azcliversion: latest
+        inlineScript: |
+          az group create -n ${{ env.AZURE_RESOURCE_GROUP }} -l eastus
+          az account show
+          az webapp create --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --plan ${{ env.AZURE_APP_PLAN }} --name ${{ env.AZURE_WEBAPP_NAME }}  
+          
