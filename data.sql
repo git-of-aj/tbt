@@ -46,6 +46,9 @@ INSERT INTO orders (user_id, product_id, quantity, order_date) VALUES
     (2, 2, 1, '2024-02-13 11:30:00'),
     (3, 3, 3, '2024-02-13 12:45:00');
 
+-- show all tables
+--  \dt or \dt+ command in psql to show tables in a specific database
+ \dt
 -- Query to display all users
 SELECT * FROM users;
 
