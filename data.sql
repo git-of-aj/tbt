@@ -1,8 +1,8 @@
 -- Create a new database
-CREATE DATABASE tbt_database;
+CREATE DATABASE tbt_14_feb;
 
 -- Connect to the new database
-\c tbt_database;
+\c tbt_14_feb;
 
 -- Create a table to store information about users
 CREATE TABLE users (
