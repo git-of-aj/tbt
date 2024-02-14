@@ -22,6 +22,13 @@ jobs:
           server-name: test897
           connection-string: ${{ secrets.AZURE_POSTGRESQL_CONNECTION_STRING }}
           plsql-file: './data.sql'
+          
+        # UPDATE DATABSE
+    - uses: azure/postgresql@v1
+      with:
+          server-name: test897
+          connection-string: ${{ secrets.AZURE_POSTGRESQL_CONNECTION_STRING }}
+          plsql-file: './new_table.sql'
 
       # Step 4: Azure logout
     - name: logout
