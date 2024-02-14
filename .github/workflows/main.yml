@@ -1,7 +1,8 @@
 name: TBT demo
 run-name: ${{ github.actor }} is Showing Demo
 # -------------------------------
-on: [push]
+on: 
+  workflow_dispatch
 # Above means whenever there is a chnage mande , pls run it 
 
 # job: COllection of Tasks
