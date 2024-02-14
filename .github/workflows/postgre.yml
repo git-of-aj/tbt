@@ -1,8 +1,11 @@
 name: PostgreSQL for GitHub Actions
-
+# When to Run it
 on: 
-  # workflow_dispatch
+  # workflow_dispatch = RUn Manually 
+  # Push = Any chnages made to Github 
   [push,workflow_dispatch]
+
+# variable with name file
 env:
   file: './new_table.sql'
   
