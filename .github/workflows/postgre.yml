@@ -2,8 +2,10 @@ name: PostgreSQL for GitHub Actions
 
 on: 
   # workflow_dispatch
-  [push]
-
+  [push,workflow_dispatch]
+env:
+  file: './new_table.sql'
+  
 jobs:
   build-and-deploy-to-dev:
     runs-on: ubuntu-latest
@@ -17,18 +19,18 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS  }}
 
       # Step 3: Run PostgreSQL script
-    - uses: azure/postgresql@v1
-      with:
-          server-name: test897
-          connection-string: ${{ secrets.AZURE_POSTGRESQL_CONNECTION_STRING }}
-          plsql-file: './data.sql'
+    # - uses: azure/postgresql@v1
+    #   with:
+    #       server-name: test897
+    #       connection-string: ${{ secrets.AZURE_POSTGRESQL_CONNECTION_STRING }}
+    #       plsql-file: './data.sql'
           
         # UPDATE DATABSE
     - uses: azure/postgresql@v1
       with:
           server-name: test897
           connection-string: ${{ secrets.AZURE_POSTGRESQL_CONNECTION_STRING }}
-          plsql-file: './new_table.sql'
+          plsql-file: ${{env.file}}
 
       # Step 4: Azure logout
     - name: logout
